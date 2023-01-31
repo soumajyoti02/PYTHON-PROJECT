@@ -1,6 +1,5 @@
 # Question: How can we use Python to scrape a website and find the 10 most common words used on the page, while handling potential errors from 
 # incorrect user input for the website URL?
-
 import requests
 from bs4 import BeautifulSoup
 from collections import Counter
@@ -20,7 +19,6 @@ def fetch_top_words(site):
             return None
     except:
         return None
-# User input for website URL
 site = input("Enter a website URL (e.g. https://www.example.com): ")
 result = fetch_top_words(site)
 if result:
@@ -28,7 +26,4 @@ if result:
     for word, count in result:
         print(f"{word}: {count}")
 else:
-    print("Error: Invalid website URL or error fetching website data")
-    
-    
-    
+    print("Error: Invalid website URL or error fetching website data")  
