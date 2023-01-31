@@ -29,3 +29,6 @@ if result:
         print(f"{word}: {count}")
 else:
     print("Error: Invalid website URL or error fetching website data")
+    
+    
+    
