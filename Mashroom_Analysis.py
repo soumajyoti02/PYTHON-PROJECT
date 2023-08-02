@@ -51,7 +51,7 @@ for col in all_columns:
     df[col] = le.fit_transform(df[col])
 
 corr_matrix = df.corr() # Checking how much each column is related with others
-sns.heatmap(corr_matrix, annot=True, cmap='Dark2')
+sns.heatmap(corr_matrix, annot=True, cmap='crest')
 plt.show()
 
 # Grouping all the Columns with Class result
