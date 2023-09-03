@@ -10,7 +10,8 @@ from sklearn.model_selection import train_test_split, cross_val_score, Stratifie
 from sklearn.metrics import classification_report, confusion_matrix
 
 from sklearn.ensemble import RandomForestClassifier  # Example model
-from imblearn.over_sampling import SMOTE
+from sklearn.ensemble import IsolationForest # For checking Outliers
+from imblearn.over_sampling import SMOTE # For Oversampling the Data of Minority Class. Works only on Classification.
 from sklearn.metrics import make_scorer
 from sklearn.metrics import accuracy_score
 
@@ -54,6 +55,20 @@ data.drop_duplicates(inplace=True)
 # Encoding is needed in ML to convert categorical data into a numerical format that machine learning algorithms can understand and process.
 label_encoder = LabelEncoder()
 data['categorical_column'] = label_encoder.fit_transform(data['categorical_column'])
+
+# Extracting the Outliers
+clf = IsolationForest(contamination=0.05)  # Adjust the contamination parameter
+# we set the contamination parameter to 0.05, indicating that we expect around 5% of the data to be outliers.
+clf.fit(df)
+outliers = clf.predict(df) == -1
+
+# Checking no. of outliers in Dataset
+df['outliers'] = outliers
+print(df['outliers'].value_counts())
+
+# Removing the outliers from the DataSet
+df = df[df['outliers'] == False]
+print(df['outliers'].value_counts())
 
 # Feature scaling (normalize or standardize numeric features)
 # It will Scale the large values in the dataset to decrease OUTLIERS.
